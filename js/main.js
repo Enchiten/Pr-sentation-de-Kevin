@@ -151,27 +151,17 @@ function showSuccessMessage(name) {
 }
 
 window.addEventListener('load', () => {
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.opacity = '1';
-        heroContent.style.transform = 'translateY(0)';
-    }
-
-    const loader = document.createElement('div');
-    loader.className = 'loader-overlay';
-    loader.innerHTML = `
-        <div class="loader-content">
-            <i class="fas fa-spinner fa-spin"></i>
-            <span>Chargement...</span>
-        </div>
-    `;
-
-    document.body.appendChild(loader);
+    const loader = document.getElementById('loaderOverlay');
 
     setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 300);
-    }, 800);
+        if (loader) {
+            loader.classList.add('loader-fade-out');
+            document.body.classList.add('loaded');
+            setTimeout(() => {
+                loader.remove();
+            }, 650);
+        }
+    }, 900);
 });
 
 window.addEventListener('scroll', () => {
